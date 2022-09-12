@@ -1,0 +1,32 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
+  "files.associations": {
+    ".env*": "properties"
+  },
+  "license-header-manager.excludeFolders": [
+    "node_modules"
+  ],
+  "license-header-manager.excludeExtensions": [
+    ".json",
+    ".md",
+    ".bat",
+    ".sh"
+  ],
+  "license-header-manager.additionalCommentStyles": [
+    {
+      "extension": ".mjs",
+      "commentStart": "/*",
+      "commentMiddle": " *",
+      "commentEnd": " */"
+    },
+    {
+      "extension": ".ts",
+      "commentStart": "/*",
+      "commentMiddle": " *",
+      "commentEnd": " */"
+    }
+  ]
+}
