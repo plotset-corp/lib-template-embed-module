@@ -5,7 +5,8 @@
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
-      "plotset"
+    "papaparse",
+    "plotset"
   ],
   "ignoreWords": [],
   "import": []
