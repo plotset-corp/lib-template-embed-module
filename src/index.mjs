@@ -7,6 +7,7 @@
 
 import {JSDOM} from 'jsdom';
 import Papa from 'papaparse';
+import validator from 'validator';
 
 /**
  *
