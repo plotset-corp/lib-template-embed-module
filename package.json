@@ -2,7 +2,7 @@
   "name": "plotset-embed-module",
   "version": "1.0.0",
   "description": "A module containing embed generator to be used in all backend projects",
-  "main": "index.mjs",
+  "main": "src/index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
