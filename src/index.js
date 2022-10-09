@@ -86,5 +86,5 @@ function generateEmbed(html, data, config, binding) {
   });
 }
 
-module.exports = generateEmbed;
+module.exports = {generateEmbed};
 
