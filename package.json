@@ -13,7 +13,8 @@
   "keywords": [
     "plotset"
   ],
-  "types": "types/index.d.ts",
+  "type": "module",
+  "types": "types/index.ts",
   "author": "tokyo@pro.ai",
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
