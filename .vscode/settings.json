@@ -17,7 +17,7 @@
   ],
   "license-header-manager.additionalCommentStyles": [
     {
-      "extension": ".mjs",
+      "extension": ".js",
       "commentStart": "/*",
       "commentMiddle": " *",
       "commentEnd": " */"
