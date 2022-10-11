@@ -48,6 +48,25 @@ function convertCsv(csv) {
 };
 
 /**
+ * convert object to 1 level deep object
+ * @param {string | object} settings
+ * @return {string}
+ */
+function flattenSettings(settings) {
+  if (typeof settings === 'string') settings = JSON.parse(settings);
+  const flatSettings = {};
+  for (const section of settings) {
+    for (const row of section.rows) {
+      for (const component of row.components) {
+        flatSettings[component.field] = component.default;
+      }
+    }
+  }
+  return flatSettings;
+}
+
+
+/**
  *
  * @param {String} html
  * @param {String} data
@@ -86,5 +105,8 @@ function generateEmbed(html, data, config, binding) {
   });
 }
 
-module.exports = {generateEmbed};
+module.exports = {
+  generateEmbed,
+  flattenSettings,
+};
 

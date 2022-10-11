@@ -20,3 +20,10 @@
     config: String,
     binding: String,
   ) : Promise<String>
+
+/**
+ *
+ * @param {string} settings
+ * @return {string}
+ */
+ export declare function flattenSettings(settings: string) : string
