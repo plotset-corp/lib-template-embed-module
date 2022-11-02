@@ -94,6 +94,7 @@ function generateEmbed(html, data, config, binding) {
           _config: _PLOTSET_CONFIG,
           _col_rel: _PLOTSET_COL_REL,
         });
+        toggleFloatingWatermark(true);
       }
       window.onload = main;
       `;
