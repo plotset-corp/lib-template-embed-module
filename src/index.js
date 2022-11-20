@@ -58,7 +58,7 @@ function flattenSettings(settings) {
   for (const section of settings) {
     for (const row of section.rows) {
       for (const component of row.components) {
-        if (component.default != null) {
+        if (component.default !== undefined) {
           flatSettings[component.field] = component.default;
         }
       }
