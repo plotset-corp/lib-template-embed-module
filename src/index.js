@@ -8,6 +8,7 @@
 const {JSDOM} = require('jsdom');
 const Papa = require('papaparse');
 const validator = require('validator');
+const jsesc = require('jsesc');
 
 /**
  *
@@ -72,13 +73,15 @@ function flattenSettings(settings) {
  *
  * @param {String} html
  * @param {String} data
- * @param {String} config
- * @param {String} binding
+ * @param {String | Object} config
+ * @param {String | Object} binding
  * @return {Promise<String>}
  */
 function generateEmbed(html, data, config, binding) {
   return new Promise(async (resolve, reject) => {
     try {
+      if (typeof config === 'string') config = JSON.parse(config);
+      if (typeof binding === 'string') binding = JSON.parse(binding);
       const formattedData = await convertCsv(data);
       const {document} = new JSDOM(html).window;
       fixScriptSrc(document);
@@ -86,11 +89,11 @@ function generateEmbed(html, data, config, binding) {
       dataScript.type = 'text/javascript';
       dataScript.text = `
       function main() {
-        const _PLOTSET_DATA=${JSON.stringify(formattedData)};
+        const _PLOTSET_DATA=${jsesc(formattedData)};
         // columns is removed when stringify
-        _PLOTSET_DATA["columns"]=${JSON.stringify(formattedData.columns)};
-        const _PLOTSET_CONFIG=JSON.parse(${JSON.stringify(config)});
-        const _PLOTSET_COL_REL=JSON.parse(${JSON.stringify(binding)});
+        _PLOTSET_DATA["columns"]=${jsesc(formattedData.columns)};
+        const _PLOTSET_CONFIG=${jsesc(config)};
+        const _PLOTSET_COL_REL=${jsesc(binding)};
         base_first_time({
           _data: _PLOTSET_DATA,
           _config: _PLOTSET_CONFIG,

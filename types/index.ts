@@ -17,8 +17,8 @@
  export declare function generateEmbed(
     html: String,
     data: String,
-    config: String,
-    binding: String,
+    config: String | Object,
+    binding: String | Object,
   ) : Promise<String>
 
 /**

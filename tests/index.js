@@ -22,8 +22,8 @@ async function test() {
     const embed = await generateEmbed(
         html,
         data,
-        JSON.stringify(config),
-        JSON.stringify(JSON.parse(binding)),
+        config,
+        binding,
     );
     const outFile = join(process.cwd(), 'tests', 'output.html');
     writeFileSync(outFile, embed, 'utf-8');
