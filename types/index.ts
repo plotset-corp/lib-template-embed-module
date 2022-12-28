@@ -27,3 +27,10 @@
  * @return {string}
  */
  export declare function flattenSettings(settings: string) : string
+
+ /**
+ *
+ * @param {string | object} settings
+ * @return {string}
+ */
+ export declare function flattenSettingsWithComment(settings: string | object) : string

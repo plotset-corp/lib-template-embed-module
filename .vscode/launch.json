@@ -5,8 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Manual Test",
+      "name": "Manual Test Embed",
       "program": "${workspaceFolder}/tests/index.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "Manual Test Flatten",
+      "program": "${workspaceFolder}/tests/flattenTest.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"

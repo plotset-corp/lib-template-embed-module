@@ -68,6 +68,63 @@ function flattenSettings(settings) {
   return flatSettings;
 }
 
+/**
+ *
+ * @param {*} component
+ * @return {string}
+ */
+function generateComment(component) {
+  let comment = '// ';
+  const type = component.type;
+  if (type === 'input-number') {
+    comment +='number';
+  } else if (type === 'radio-button') {
+    const options = component.options.map((o) => o.value);
+    comment += options.join('|');
+  } else if (type === 'switch') {
+    comment += 'boolean';
+  } else if (type === 'color-picker') {
+    comment += 'rgb color';
+  } else if (type === 'input-text') {
+    comment += 'string';
+  } else if (type === 'select') {
+    const options = component.options.map((o) => o.value);
+    comment += options.join('|');
+  } else if (type === 'input-slider') {
+    comment += `number - min: ${component.min}, `;
+    comment += `max: ${component.max}, step: ${component.step}`;
+  } else if (type === 'select-color-palette') {
+    comment += 'color palette';
+  }
+  return comment;
+}
+
+/**
+ * convert object to 1 level deep object
+ * @param {string | object} settings
+ * @return {string}
+ */
+function flattenSettingsWithComment(settings) {
+  if (typeof settings === 'string') settings = JSON.parse(settings);
+  let flatSettings = '{\n';
+  for (const section of settings) {
+    for (const row of section.rows) {
+      for (const component of row.components) {
+        if (component.default !== undefined) {
+          let defaultValue = component.default;
+          if (defaultValue === '') defaultValue = '""';
+          if (defaultValue === null) defaultValue = 'null';
+          flatSettings += `  "${component.field}": ${defaultValue}, `;
+          flatSettings += generateComment(component);
+          flatSettings += `\n`;
+        }
+      }
+    }
+  }
+  flatSettings += '}';
+  return flatSettings;
+}
+
 
 /**
  *
@@ -115,5 +172,6 @@ function generateEmbed(html, data, config, binding) {
 module.exports = {
   generateEmbed,
   flattenSettings,
+  flattenSettingsWithComment,
 };
 
