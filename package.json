@@ -1,6 +1,6 @@
 {
   "name": "@proai/plotset-embed-module",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A module containing embed generator to be used in all backend projects",
   "main": "src/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "ssh://git@gitlab.pro.ai:10022/pai/plotset-embed-module.git"
   },
   "publishConfig": {
-    "@proai:registry": " https://gitlab.pro.ai/api/v4/projects/138/packages/npm/"
+    "@proai:registry": "https://gitlab.pro.ai/api/v4/projects/138/packages/npm/"
   },
   "keywords": [
     "plotset"

@@ -112,8 +112,14 @@ function flattenSettingsWithComment(settings) {
       for (const component of row.components) {
         if (component.default !== undefined) {
           let defaultValue = component.default;
-          if (defaultValue === '') defaultValue = '""';
           if (defaultValue === null) defaultValue = 'null';
+          if (typeof defaultValue === 'number') {
+            // do nothing for now
+          } else if (typeof defaultValue === 'boolean') {
+            // do nothing for now
+          } else {
+            defaultValue = `"${defaultValue}"`;
+          }
           flatSettings += `  "${component.field}": ${defaultValue}, `;
           flatSettings += generateComment(component);
           flatSettings += `\n`;
