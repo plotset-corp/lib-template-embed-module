@@ -19,11 +19,13 @@ async function test() {
     const settingsPath = join(templatePath, 'settings.json');
     const settings = readFileSync(settingsPath, 'utf8') ?? '[]';
     const config = flattenSettings(settings);
+    const showWatermark = false;
     const embed = await generateEmbed(
         html,
         data,
         config,
         binding,
+        showWatermark,
     );
     const outFile = join(process.cwd(), 'tests', 'output.html');
     writeFileSync(outFile, embed, 'utf-8');

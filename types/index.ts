@@ -5,21 +5,22 @@
  * PlotSet, Inc <info@plotset.com>
  */
 
-
-/**
+  /**
  *
  * @param {String} html
  * @param {String} data
- * @param {String} config
- * @param {String} binding
+ * @param {String | Object} config
+ * @param {String | Object} binding
+ * @param {Boolean} showWatermark
  * @return {Promise<String>}
  */
- export declare function generateEmbed(
-    html: String,
-    data: String,
-    config: String | Object,
-    binding: String | Object,
-  ) : Promise<String>
+export declare function generateEmbed(
+  html: string,
+  data: string,
+  config: string | object,
+  binding: string | object,
+  showWatermark?: boolean
+): Promise<string>;
 
 /**
  *

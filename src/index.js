@@ -138,9 +138,10 @@ function flattenSettingsWithComment(settings) {
  * @param {String} data
  * @param {String | Object} config
  * @param {String | Object} binding
+ * @param {Boolean} showWatermark
  * @return {Promise<String>}
  */
-function generateEmbed(html, data, config, binding) {
+function generateEmbed(html, data, config, binding, showWatermark=true) {
   return new Promise(async (resolve, reject) => {
     try {
       if (typeof config === 'string') config = JSON.parse(config);
@@ -163,7 +164,7 @@ function generateEmbed(html, data, config, binding) {
           _col_rel: _PLOTSET_COL_REL,
         });
 
-        toggleFloatingWatermark(true);
+        toggleFloatingWatermark(${showWatermark});
       }
       window.onload = main;
       `;
