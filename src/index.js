@@ -164,7 +164,8 @@ function generateEmbed(html, data, config, binding, showWatermark=true) {
           _col_rel: _PLOTSET_COL_REL,
         });
 
-        toggleFloatingWatermark(${showWatermark});
+        toggleFloatingWatermark(${showWatermark})
+          .catch((e) => console.error);
       }
       window.onload = main;
       `;
