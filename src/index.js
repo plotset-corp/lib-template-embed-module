@@ -138,14 +138,23 @@ function flattenSettingsWithComment(settings) {
  * @param {String} data
  * @param {String | Object} config
  * @param {String | Object} binding
+ * @param {String | Object} formats
  * @param {Boolean} showWatermark
  * @return {Promise<String>}
  */
-function generateEmbed(html, data, config, binding, showWatermark=true) {
+function generateEmbed(
+    html,
+    data,
+    config,
+    binding,
+    formats,
+    showWatermark=true,
+) {
   return new Promise(async (resolve, reject) => {
     try {
       if (typeof config === 'string') config = JSON.parse(config);
       if (typeof binding === 'string') binding = JSON.parse(binding);
+      if (typeof formats === 'string') formats = JSON.parse(formats);
       const formattedData = await convertCsv(data);
       const {document} = new JSDOM(html).window;
       fixScriptSrc(document);
@@ -158,10 +167,12 @@ function generateEmbed(html, data, config, binding, showWatermark=true) {
         _PLOTSET_DATA["columns"]=${jsesc(formattedData.columns)};
         const _PLOTSET_CONFIG=${jsesc(config)};
         const _PLOTSET_COL_REL=${jsesc(binding)};
+        const _PLOTSET_FORMATS=${jsesc(formats)};
         base_first_time({
           _data: _PLOTSET_DATA,
           _config: _PLOTSET_CONFIG,
           _col_rel: _PLOTSET_COL_REL,
+          _columnsType: _PLOTSET_FORMATS,
         });
 
         toggleFloatingWatermark(${showWatermark})

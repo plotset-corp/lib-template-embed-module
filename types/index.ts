@@ -11,6 +11,7 @@
  * @param {String} data
  * @param {String | Object} config
  * @param {String | Object} binding
+ * @param {String | Object} formats
  * @param {Boolean} showWatermark
  * @return {Promise<String>}
  */
@@ -19,6 +20,7 @@ export declare function generateEmbed(
   data: string,
   config: string | object,
   binding: string | object,
+  formats: string | object,
   showWatermark?: boolean
 ): Promise<string>;
 
