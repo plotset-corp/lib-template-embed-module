@@ -21,6 +21,7 @@ async function test() {
     const config = flattenSettings(settings);
     const formats = '[]';
     const showWatermark = false;
+    const handleWatermark = true;
     const embed = await generateEmbed(
         html,
         data,
@@ -28,6 +29,7 @@ async function test() {
         binding,
         formats,
         showWatermark,
+        handleWatermark,
     );
     const outFile = join(process.cwd(), 'tests', 'output.html');
     writeFileSync(outFile, embed, 'utf-8');
