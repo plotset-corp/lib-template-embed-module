@@ -140,7 +140,6 @@ function flattenSettingsWithComment(settings) {
  * @param {String | Object} binding
  * @param {String | Object} formats
  * @param {Boolean} showWatermark
- * @param {Boolean} handleWatermark
  * @return {Promise<String>}
  */
 function generateEmbed(
@@ -150,7 +149,6 @@ function generateEmbed(
     binding,
     formats,
     showWatermark=true,
-    handleWatermark=true,
 ) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -161,9 +159,6 @@ function generateEmbed(
       const {document} = new JSDOM(html).window;
       fixScriptSrc(document);
       const dataScript = document.createElement('script');
-      const watermarkCode = handleWatermark ?
-      `toggleFloatingWatermark(${showWatermark}).catch((e) => console.error);` :
-      '';
       dataScript.type = 'text/javascript';
       dataScript.text = `
       function main() {
@@ -178,9 +173,8 @@ function generateEmbed(
           _config: _PLOTSET_CONFIG,
           _col_rel: _PLOTSET_COL_REL,
           _columnsType: _PLOTSET_FORMATS,
+          watermark: ${showWatermark},
         });
-
-        ${watermarkCode}
       }
       window.onload = main;
       `;
