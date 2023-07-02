@@ -24,21 +24,73 @@ function fixScriptSrc(document) {
 }
 
 /**
- *
- * @param {*} csv
- * @return {Promise}
+ * Normalizes the header data by replacing null or empty
+ * values with "col-X" format.
+ * @param {any[]} header - The header data array.
+ * @return {any[]} - The normalized header data array.
  */
-function convertCsv(csv) {
+function normalizeDataHeader(header) {
+  let indicateNullData = 0;
+  return header.map((_data) => {
+    if (_data === null || _data === '') {
+      indicateNullData += 1;
+      return `col-${indicateNullData}`;
+    } else {
+      return _data;
+    }
+  });
+};
+
+/**
+ * Separates the header of a CSV string.
+ * @param {string} csvData - The CSV data string.
+ * @return {Promise<any[]>} - An array containing the separated header.
+ */
+function separateHeardOfCsv(csvData) {
+  const lastCharacterOfHeaderIndex = csvData.indexOf('\n');
+  const header = csvData.slice(0, lastCharacterOfHeaderIndex);
   return new Promise((resolve, reject) => {
-    // todo
-    let resultData = [];
-    Papa.parse(csv, {
-      header: true,
-      skipEmptyLines: true,
-      dynamicTyping: false,
+    Papa.parse(header, {
       complete(result) {
-        resultData = result.data;
-        resultData['columns'] = result.meta.fields;
+        result?.data?.[0] ?
+          resolve(normalizeDataHeader(result?.data?.[0])) :
+          [];
+      },
+      error(err) {
+        reject(err);
+      },
+    });
+  });
+};
+
+/**
+ * Converts a CSV string to an array of objects and returns a Promise.
+ * @param {any | string} dataString - The input data string.
+ * @return {Promise<any[]>} - A Promise resolving to an array of objects.
+ */
+async function csvToArrayObject(dataString) {
+  const header = await separateHeardOfCsv(dataString);
+  return new Promise((resolve, reject) => {
+    const resultData = [];
+    let index = 0;
+    Papa.parse(dataString, {
+      skipEmptyLines: false,
+      dynamicTyping: false,
+      header: false,
+      step(p, c) {
+        if (index !== 0) {
+          const row = header?.reduce(
+              (previousValue, currentValue, index) => {
+                return {...previousValue, [currentValue]: p.data[index] || ''};
+              },
+              {},
+          );
+          resultData.push(row);
+        }
+        index = index + 1;
+      },
+      complete() {
+        resultData['columns'] = header;
         resolve(resultData);
       },
       error(err) {
@@ -47,6 +99,7 @@ function convertCsv(csv) {
     });
   });
 };
+
 
 /**
  * convert object to 1 level deep object
@@ -155,7 +208,7 @@ function generateEmbed(
       if (typeof config === 'string') config = JSON.parse(config);
       if (typeof binding === 'string') binding = JSON.parse(binding);
       if (typeof formats === 'string') formats = JSON.parse(formats);
-      const formattedData = await convertCsv(data);
+      const formattedData = await csvToArrayObject(data);
       const {document} = new JSDOM(html).window;
       fixScriptSrc(document);
       const dataScript = document.createElement('script');
