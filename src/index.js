@@ -215,9 +215,9 @@ function generateEmbed(
       dataScript.type = 'text/javascript';
       dataScript.text = `
       function main() {
-        const _PLOTSET_DATA=${jsesc(formattedData)};
+        const _PLOTSET_DATA=${JSON.stringify(formattedData)};
         // columns is removed when stringify
-        _PLOTSET_DATA["columns"]=${jsesc(formattedData.columns)};
+        _PLOTSET_DATA["columns"]=${JSON.stringify(formattedData.columns)};
         const _PLOTSET_CONFIG=${jsesc(config)};
         const _PLOTSET_COL_REL=${jsesc(binding)};
         const _PLOTSET_FORMATS=${jsesc(formats)};
