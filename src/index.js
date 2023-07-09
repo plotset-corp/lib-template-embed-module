@@ -69,6 +69,9 @@ function separateHeardOfCsv(csvData) {
  * @return {Promise<any[]>} - A Promise resolving to an array of objects.
  */
 async function csvToArrayObject(dataString) {
+  if (dataString.charCodeAt(0) === 0xFEFF) {
+    dataString = dataString.slice(1);
+  }
   const header = await separateHeardOfCsv(dataString);
   return new Promise((resolve, reject) => {
     const resultData = [];
@@ -215,12 +218,12 @@ function generateEmbed(
       dataScript.type = 'text/javascript';
       dataScript.text = `
       function main() {
-        const _PLOTSET_DATA=${JSON.stringify(formattedData)};
+        const _PLOTSET_DATA=${jsesc(formattedData, {json: true})};
         // columns is removed when stringify
-        _PLOTSET_DATA["columns"]=${JSON.stringify(formattedData.columns)};
-        const _PLOTSET_CONFIG=${jsesc(config)};
-        const _PLOTSET_COL_REL=${jsesc(binding)};
-        const _PLOTSET_FORMATS=${jsesc(formats)};
+        _PLOTSET_DATA["columns"]=${jsesc(formattedData.columns, {json: true})};
+        const _PLOTSET_CONFIG=${jsesc(config, {json: true})};
+        const _PLOTSET_COL_REL=${jsesc(binding, {json: true})};
+        const _PLOTSET_FORMATS=${jsesc(formats, {json: true})};
         base_first_time({
           _data: _PLOTSET_DATA,
           _config: _PLOTSET_CONFIG,

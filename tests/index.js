@@ -8,7 +8,7 @@ const {join} = require('path');
  */
 async function test() {
   try {
-    const templatePath = join(process.cwd(), 'tests', 'template');
+    const templatePath = join(process.cwd(), 'tests', 'template2');
 
     const htmlPath = join(templatePath, 'index.html');
     const html = readFileSync(htmlPath, 'utf8') ?? '';

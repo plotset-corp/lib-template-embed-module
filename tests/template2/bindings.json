@@ -1,0 +1,42 @@
+[
+  {
+    "field": "labels",
+    "label": "Label/time",
+    "default": "A",
+    "required": true,
+    "hint": "",
+    "value": "A",
+    "color": "#E3F2FD",
+    "secondColor": "#1976D2"
+  },
+  {
+    "field": "values",
+    "label": "Values",
+    "default": "B",
+    "required": true,
+    "hint": "",
+    "value": "C",
+    "color": "#E0F2F1",
+    "secondColor": "#00796B"
+  },
+  {
+    "field": "filter",
+    "label": "Filter/color",
+    "default": "C",
+    "required": false,
+    "hint": "",
+    "value": "",
+    "color": "#F3E5F5",
+    "secondColor": "#7B1FA2"
+  },
+  {
+    "field": "images",
+    "label": "Images",
+    "default": "",
+    "required": false,
+    "hint": "",
+    "value": "",
+    "color": "#FFEBEE",
+    "secondColor": "#D32F2F"
+  }
+]
