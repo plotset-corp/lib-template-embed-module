@@ -1,6 +1,6 @@
 {
   "name": "@proai/plotset-embed-module",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A module containing embed generator to be used in all backend projects",
   "main": "src/index.js",
   "scripts": {
