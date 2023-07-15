@@ -9,6 +9,7 @@ const {JSDOM} = require('jsdom');
 const Papa = require('papaparse');
 const validator = require('validator');
 const jsesc = require('jsesc');
+const EXTERNAL_URL = process.env.EXTERNAL_URL ?? 'https://plotset.com';
 
 /**
  *
@@ -18,7 +19,7 @@ function fixScriptSrc(document) {
   const scripts = document.querySelectorAll('script');
   for (const script of scripts) {
     if (script.src && !validator.isURL(script.src)) {
-      script.src = new URL(script.src, config.externalUrl).href;
+      script.src = new URL(script.src, EXTERNAL_URL).href;
     }
   }
 }
