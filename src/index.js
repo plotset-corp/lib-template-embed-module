@@ -78,7 +78,7 @@ async function csvToArrayObject(dataString) {
     const resultData = [];
     let index = 0;
     Papa.parse(dataString, {
-      skipEmptyLines: false,
+      skipEmptyLines: true,
       dynamicTyping: false,
       header: false,
       step(p, c) {
