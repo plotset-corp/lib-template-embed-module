@@ -2,13 +2,12 @@
   "version": "0.2",
   "language": "en",
   "ignorePaths": [],
-  "dictionaryDefinitions": [],
-  "dictionaries": [],
   "words": [
     "jsesc",
     "papaparse",
     "plotset",
-    "proai"
+    "proai",
+    "oembed"
   ],
   "ignoreWords": [],
   "import": []

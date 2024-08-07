@@ -21,6 +21,8 @@ async function test() {
     const config = flattenSettings(settings);
     const formats = '[]';
     const showWatermark = false;
+    const uuid = '0b4e7ea7-0923-43d3-8390-c4699dc3d9a8';
+    const oembedUrl = `http://localhost:3000/oembed?url=http://localhost:3000/embeds/${uuid}`;
     const embed = await generateEmbed(
         html,
         data,
@@ -28,6 +30,7 @@ async function test() {
         binding,
         formats,
         showWatermark,
+        oembedUrl,
     );
     const outFile = join(process.cwd(), 'tests', 'output.html');
     writeFileSync(outFile, embed, 'utf-8');

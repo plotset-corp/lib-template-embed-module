@@ -22,6 +22,7 @@ export declare function generateEmbed(
   binding: string | object,
   formats: string | object,
   showWatermark?: boolean,
+  oembedUrl?: String | null,
 ): Promise<string>;
 
 /**

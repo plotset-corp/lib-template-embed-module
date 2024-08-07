@@ -197,6 +197,7 @@ function flattenSettingsWithComment(settings) {
  * @param {String | Object} binding
  * @param {String | Object} formats
  * @param {Boolean} showWatermark
+ * @param {String | null} oembedUrl
  * @return {Promise<String>}
  */
 function generateEmbed(
@@ -206,6 +207,7 @@ function generateEmbed(
     binding,
     formats,
     showWatermark=true,
+    oembedUrl=null,
 ) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -215,6 +217,13 @@ function generateEmbed(
       const formattedData = await csvToArrayObject(data);
       const {document} = new JSDOM(html).window;
       fixScriptSrc(document);
+      if (oembedUrl) {
+        const link = document.createElement('link');
+        link.rel = 'alternate';
+        link.type = 'application/json+oembed';
+        link.href = oembedUrl;
+        document.head.appendChild(link);
+      }
       const dataScript = document.createElement('script');
       dataScript.type = 'text/javascript';
       dataScript.text = `
