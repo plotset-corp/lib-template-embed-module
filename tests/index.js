@@ -8,7 +8,7 @@ const {join} = require('path');
  */
 async function test() {
   try {
-    const templatePath = join(process.cwd(), 'tests', 'template2');
+    const templatePath = join(process.cwd(), 'tests', 'template');
 
     const htmlPath = join(templatePath, 'index.html');
     const html = readFileSync(htmlPath, 'utf8') ?? '';
@@ -19,6 +19,9 @@ async function test() {
     const settingsPath = join(templatePath, 'settings.json');
     const settings = readFileSync(settingsPath, 'utf8') ?? '[]';
     const config = flattenSettings(settings);
+    // const config = settings;
+    // const formatsPath = join(templatePath, 'formats.json');
+    // const formats = readFileSync(formatsPath, 'utf8') ?? '[]';
     const formats = '[]';
     const showWatermark = false;
     const uuid = '0b4e7ea7-0923-43d3-8390-c4699dc3d9a8';
