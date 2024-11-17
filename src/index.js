@@ -47,7 +47,7 @@ function normalizeDataHeader(header) {
  * @param {string} csvData - The CSV data string.
  * @return {Promise<any[]>} - An array containing the separated header.
  */
-function separateHeaderOfCsv(csvData) {
+function separateHeardOfCsv(csvData) {
   const lastCharacterOfHeaderIndex = csvData.indexOf('\n');
   const header = csvData.slice(0, lastCharacterOfHeaderIndex);
   return new Promise((resolve, reject) => {
@@ -73,29 +73,29 @@ async function csvToArrayObject(dataString) {
   if (dataString.charCodeAt(0) === 0xFEFF) {
     dataString = dataString.slice(1);
   }
-  const header = await separateHeaderOfCsv(dataString);
+  const header = await separateHeardOfCsv(dataString);
   return new Promise((resolve, reject) => {
-    const resultsData = [];
-    let headers;
+    const resultData = [];
+    let index = 0;
     Papa.parse(dataString, {
       skipEmptyLines: true,
       dynamicTyping: false,
       header: false,
-      step: function(result, parser) {
-        const data = result.data;
-        if (!headers) {
-          headers = data;
-        } else {
-          const obj = headers.reduce((object, header, index) => {
-            object[header] = data[index] || '';
-            return object;
-          }, {});
-          resultsData.push(obj);
+      step(p, c) {
+        if (index !== 0) {
+          const row = header?.reduce(
+              (previousValue, currentValue, index) => {
+                return {...previousValue, [currentValue]: p.data[index] || ''};
+              },
+              {},
+          );
+          resultData.push(row);
         }
+        index = index + 1;
       },
       complete() {
-        resultsData['columns'] = header;
-        resolve(resultsData);
+        resultData['columns'] = header;
+        resolve(resultData);
       },
       error(err) {
         reject(err);

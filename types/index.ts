@@ -13,6 +13,7 @@
  * @param {String | Object} binding
  * @param {String | Object} formats
  * @param {Boolean} showWatermark
+ * @param {String | null} oembedUrl
  * @return {Promise<String>}
  */
 export declare function generateEmbed(

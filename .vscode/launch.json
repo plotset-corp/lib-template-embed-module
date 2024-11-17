@@ -23,6 +23,15 @@
       "type": "node"
     },
     {
+      "name": "Manual Test Compare",
+      "program": "${workspaceFolder}/tests/compare.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Mocha Tests",
