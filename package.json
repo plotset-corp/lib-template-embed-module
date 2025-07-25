@@ -1,6 +1,6 @@
 {
   "name": "@plotset-corp/lib-template-embed-module",
-  "version": "1.0.19",
+  "version": "1.0.23",
   "description": "A module containing embed generator to be used in all backend projects",
   "main": "src/index.js",
   "scripts": {
